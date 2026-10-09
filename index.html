@@ -56,6 +56,93 @@ html,body{max-width:100%;overflow-x:clip}
 @media(max-width:390px){.tile .label{font-size:7px;max-height:22px}.tile .label.long{font-size:6px;max-height:21px}}
 @media(max-width:320px){.tile .label{font-size:6.6px;max-height:21px}.tile .label.long{font-size:5.9px;max-height:19px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.tile{animation:none!important;transition:none!important}}
+
+/* v4: simplified visual system + responsive full-catalog desktop layout */
+:root{--bg:#f3f7f4;--ink:#26332d;--dim:#76867c;--line:#dfe8e0;--accent:#339866;--pure:#cbefda;--cool:#d2e8ff;--mad:#f9d5df;--jolly:#f9e9b4;--gloomy:#e1d7fb;--unknown:#eae9ee}
+body{background:radial-gradient(ellipse at 50% -30%,#e3f5e9 0%,transparent 70%),var(--bg)}
+.wrap{max-width:860px;padding:0 10px 30px}
+.sticky{padding:10px 0 9px;border-color:#e0e9e2}
+.head{gap:8px;margin-bottom:7px}
+.brand-logo{border:1px solid #e0e7e2;border-radius:11px;box-shadow:0 2px 8px #24472c12}
+.head h1{font-size:16px;letter-spacing:-.65px}
+.headstat{border:1px solid #dfe9e1;background:#fff;box-shadow:0 1px 2px #18342309}
+.headstat strong{color:#25865d}
+.time{font-size:11px;color:#596d61}
+.meter{height:4px;background:#dfe9e2}
+.meterFill{background:linear-gradient(90deg,#76cf98,#329b75)}
+.entry input{border:1px solid #d9e4da;box-shadow:0 2px 6px #21372508}
+.entry button{background:#328f66;box-shadow:0 3px 9px #26855120}
+.entry button:hover{background:#267c59}
+.switch button{transition:background .16s,color .16s}
+.switch button[aria-pressed=true]{background:#dcefe2;color:#2b865c}
+.toolbtn{background:#e6eee7;color:#476857}
+.toolbtn.warn{background:#f7e7e2;color:#b06c62}
+.tile{border-radius:7px;border:1px solid rgba(28,40,31,.10);box-shadow:inset 0 1px 0 #fff8;transition:transform .18s,box-shadow .18s,border-color .18s}
+.tile.found{border-color:rgba(34,72,47,.19)}
+.tile .question{font-weight:900;color:rgba(53,69,59,.32)}
+.tile .number{color:rgba(39,61,46,.55)}
+.tile .label{background:rgba(255,255,255,.92);color:#314038}
+.tile.spotlight{box-shadow:0 0 0 2px #229667,0 0 0 5px #ebf8ec,0 6px 18px #24462d23}
+.empty{padding:30px 8px}
+@media(max-width:599px){
+  .wrap{padding:0 7px 22px}
+  .sticky{padding:7px 0 7px}
+  .head{gap:5px;min-height:31px;margin-bottom:6px}
+  .brand-logo{width:32px;height:32px;flex-basis:32px;border-radius:9px}
+  .head h1{font-size:14px}
+  .headstat{padding:4px 6px;gap:3px}
+  .headstat strong{font-size:15px}
+  .time{font-size:10px}
+  .sound{margin-left:0}
+  .meter{margin-bottom:7px}
+  .entry{gap:5px}
+  .entry input{height:41px;border-radius:9px}
+  .entry button{border-radius:9px;min-width:54px}
+  .toolbar{margin-top:6px}
+  .catalog{padding-top:8px}
+  .grid{gap:3px}
+  .tile{border-radius:5px}
+  .tile .number{top:3px;left:3px;font-size:8px}
+}
+@media(max-width:359px){.head h1{font-size:12px}.headstat{padding:3px 5px}}
+/* Desktop catalog is exactly one viewport high; no page scroll needed. */
+@media(min-width:900px) and (min-height:480px) and (hover:hover){
+  html,body{height:100%;overflow:hidden}
+  .wrap{height:100vh;height:100dvh;max-width:none;width:100%;padding:11px clamp(12px,1.6vw,32px) 12px;display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .sticky{position:relative;z-index:2;top:auto;display:grid;grid-template-columns:minmax(300px,1fr) minmax(230px,1fr) auto;grid-template-rows:46px 4px;gap:8px 12px;align-items:center;border:0;padding:0 3px 4px;background:transparent;backdrop-filter:none;flex:0 0 auto}
+  .head{grid-column:1;grid-row:1;min-width:0;margin:0;min-height:0;gap:9px}
+  .head h1{font-size:clamp(14px,1.1vw,19px);line-height:1.12}
+  .brand-logo{width:38px;height:38px;flex-basis:38px}
+  .headstat{margin-left:auto;padding:6px 9px;border-radius:10px}
+  .headstat strong{font-size:18px}
+  .headstat .total{font-size:12px}
+  .time{font-size:12px;flex-shrink:0}
+  .sound{height:30px;width:30px;margin:0;flex-shrink:0}
+  .entry{grid-column:2;grid-row:1;align-self:stretch;margin:0;min-width:0}
+  .entry input{height:100%;border-radius:11px;font-size:15px}
+  .entry button{height:100%;min-width:64px;border-radius:11px}
+  .toolbar{grid-column:3;grid-row:1;min-width:0;align-self:stretch;margin:0;gap:6px}
+  .switch{flex:0 0 auto;align-items:center;border:1px solid #dfe9e1;border-radius:10px;padding:3px;background:#fff}
+  .switch button{font-size:12px;padding:8px 8px}
+  .toolbtn{font-size:12px;border-radius:10px;padding:0 11px}
+  .meter{grid-column:1/-1;grid-row:2;height:4px;margin:0;border-radius:5px}
+  .catalog{flex:1;min-height:0;width:100%;padding:8px 0 0;margin:0;overflow:hidden;display:flex;flex-direction:column}
+  .grid{--cols:17;--rows:8;--desktop-gap:5px;flex:1;width:100%;height:100%;min-height:0;min-width:0;display:grid;grid-template-columns:repeat(var(--cols),minmax(0,1fr));grid-template-rows:repeat(var(--rows),minmax(0,1fr));grid-auto-flow:row;gap:var(--desktop-gap);align-items:stretch;align-content:stretch}
+  .tile{width:100%;height:100%;min-height:0;aspect-ratio:auto;border-radius:clamp(5px,.55vw,10px);align-self:stretch}
+  .tile .number{top:4px;left:5px;font-size:clamp(8px,.65vw,11px)}
+  .tile .question{font-size:clamp(18px,2vw,32px)}
+  .tile.hint .question{font-size:clamp(14px,1.5vw,24px)}
+  .tile .label{font-size:clamp(8px,.72vw,11px);min-height:14px;line-height:1.1;padding:2px 1px 3px}
+  .tile .label.long{font-size:clamp(7px,.6vw,9px);line-height:1.08}
+  .tile .fallback{font-size:clamp(8px,.72vw,11px)}
+  .empty{align-self:center}
+}
+@media(min-width:900px) and (max-width:1130px) and (min-height:480px) and (hover:hover){
+  .sticky{grid-template-columns:minmax(280px,1.02fr) minmax(200px,.9fr) auto;gap:8px}
+  .head{gap:6px}.head h1{font-size:14px}.headstat{padding:5px 6px}
+  .time{font-size:10px}.switch button{font-size:11px;padding:7px 5px}.toolbtn{padding:0 8px;font-size:11px}
+}
+
 </style></head><body><div class="wrap">
 <div class="sticky">
  <header class="head"><div class="brand-logo" aria-label="트릭컬 리바이브"><span class="brand-fallback">트릭컬</span><img src="https://preview.files.api.ogq.me/PROFILE/c7314396/5ef216934137c/5ef216934137c.png?format=r240_240" alt="트릭컬 리바이브" onerror="this.parentElement.classList.add('logo-failed');this.remove()"></div><h1>사도 맞추기</h1><div class="headstat"><strong id="score">0</strong><span class="total">/ 135</span></div><div class="time" id="time">00:00</div><button id="sound" class="sound" type="button" aria-label="효과음" aria-pressed="true">♪</button></header>
@@ -125,17 +212,36 @@ function refreshCell(id){const a=APOSTLES[id],el=cells[id];if(!el)return;const i
  im.src=sources[0];photo.append(im)
  } else {const n=document.createElement('span');n.className='fallback';n.textContent=a.name;photo.append(n)}
  const badge=document.createElement('span');badge.className='number';badge.textContent=displayNumber.get(id);el.append(badge);const label=document.createElement('span');label.className='label'+(a.name.length>=7?' long':'');label.textContent=a.name;el.append(photo,label);el.title=a.name+' · '+a.attr;el.setAttribute('aria-label',a.name+' '+a.attr+(isLost?' 공개':' 발견'))}
-function build(){const fr=document.createDocumentFragment();order.forEach(id=>fr.append(buildCell(id)));$('grid').append(fr);update()}
+const desktopQuery=window.matchMedia('(min-width:900px) and (min-height:480px) and (hover:hover)');
+function fitCatalog(){
+ const grid=$('grid');if(!desktopQuery.matches){grid.style.removeProperty('--cols');grid.style.removeProperty('--rows');return}
+ const box=grid.getBoundingClientRect();const width=box.width,height=box.height;
+ if(width<1||height<1)return;
+ const gap=parseFloat(getComputedStyle(grid).columnGap)||5;let best=null;
+ for(let cols=11;cols<=27;cols++){
+   const rows=Math.ceil(APOSTLES.length/cols);
+   const w=(width-(cols-1)*gap)/cols,h=(height-(rows-1)*gap)/rows;
+   if(w<=0||h<=0)continue;
+   const ratio=w/h;
+   const score=Math.min(w,h)-Math.abs(Math.log(ratio/.92))*3-(cols*rows-APOSTLES.length)*.04;
+   if(!best||score>best.score)best={cols,rows,score};
+ }
+ if(best){grid.style.setProperty('--cols',best.cols);grid.style.setProperty('--rows',best.rows)}
+}
+function build(){const fr=document.createDocumentFragment();order.forEach(id=>fr.append(buildCell(id)));$('grid').append(fr);update();fitCatalog()}
+window.addEventListener('resize',()=>{fitCatalog()},{passive:true});
+if(window.visualViewport)window.visualViewport.addEventListener('resize',()=>fitCatalog(),{passive:true});
+
 function update(){const n=found.size;$('score').textContent=n;$('meter').style.width=(100*n/APOSTLES.length)+'%';$('time').textContent=clock(seconds);$('sound').textContent=soundOn?'♪':'♩';$('sound').setAttribute('aria-pressed',String(soundOn));$('answer').disabled=finished;$('submit').disabled=finished;$('hintBtn').disabled=finished;$('giveupBtn').disabled=finished;let shown=0;cells.forEach((el,id)=>{const visible=filter==='all'||(filter==='found'?found.has(id):!found.has(id));el.hidden=!visible;if(visible)shown++});$('empty').hidden=shown>0;document.querySelectorAll('[data-filter]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.filter===filter)))}
 function send(){if(finished)return;const el=$('answer'),s=el.value.trim();el.value='';if(!s)return;start();const id=lookup.get(normalize(s));if(id===undefined){toast('등록되지 않은 이름이에요',true);beep(false);return}if(found.has(id)){toast('이미 발견했어요');return}found.add(id);hinted.delete(id);refreshCell(id);cells[id].classList.add('just');setTimeout(()=>cells[id].classList.remove('just'),320);toast(APOSTLES[id].name+' 발견!');beep();if(filter==='missing')filter='all';update();if(window.matchMedia('(max-width:599px)').matches)$('answer').blur();requestAnimationFrame(()=>setTimeout(()=>jumpTo(id),85));if(found.size===APOSTLES.length)end(false)}
-function jumpTo(id){const el=cells[id];if(!el||el.hidden)return;const sticky=document.querySelector('.sticky');el.style.scrollMarginTop=(sticky?sticky.getBoundingClientRect().height+12:165)+'px';el.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center',inline:'nearest'});el.classList.add('spotlight');setTimeout(()=>el.classList.remove('spotlight'),1400)}
+function jumpTo(id){const el=cells[id];if(!el||el.hidden)return;if(desktopQuery.matches){el.classList.add('spotlight');setTimeout(()=>el.classList.remove('spotlight'),1400);return}const sticky=document.querySelector('.sticky');el.style.scrollMarginTop=(sticky?sticky.getBoundingClientRect().height+12:165)+'px';el.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center',inline:'nearest'});el.classList.add('spotlight');setTimeout(()=>el.classList.remove('spotlight'),1400)}
 function hint(){if(finished)return;const a=APOSTLES.filter(x=>!found.has(x.id)&&!hinted.has(x.id));if(!a.length){toast('남은 힌트가 없어요');return}start();const pick=a[Math.floor(Math.random()*a.length)];hinted.add(pick.id);hintsUsed++;refreshCell(pick.id);if(filter==='found')filter='all';update();if(window.matchMedia('(max-width:599px)').matches)$('answer').blur();jumpTo(pick.id);toast('힌트 '+displayNumber.get(pick.id))}
 function dialog(title,desc,buttons,result){stop();$('title').textContent=title;$('description').textContent=desc;$('result').hidden=!result;if(result)$('result').textContent=found.size+' / '+APOSTLES.length+' · '+clock(seconds);const actions=$('actions');actions.replaceChildren();for(const [label,type,cb] of buttons){let b=document.createElement('button');b.type='button';b.className=type;b.textContent=label;b.addEventListener('click',cb);actions.append(b)}$('shade').hidden=false}
 function close(){ $('shade').hidden=true;if(started&&!finished)start() }
 function giveup(){if(finished)return;dialog('도전을 끝낼까요?','남은 정답이 공개됩니다.',[['취소','',close],['정답 공개','warn',()=>{close();end(true)}]])}
 function end(lost){finished=true;gaveUp=lost;stop();cells.forEach((_,id)=>refreshCell(id));update();dialog(lost?'도전 종료':'도감 완성',lost?'결과를 확인하세요.':'전부 맞혔어요!',[['결과 복사','',copy],['다시 하기','main',reset],['닫기','',close]],true)}
 async function copy(){const msg=`트릭컬 사도 맞추기\n${found.size}/${APOSTLES.length}명 · ${clock(seconds)} · 힌트 ${hintsUsed}회`;try{if(navigator.clipboard&&window.isSecureContext)await navigator.clipboard.writeText(msg);else{const t=document.createElement('textarea');t.value=msg;document.body.append(t);t.select();document.execCommand('copy');t.remove()}toast('결과를 복사했어요')}catch(e){toast('복사할 수 없어요',true)}}
-function reset(){if(!finished&&!confirm('처음부터 다시 시작할까요?'))return;stop();found.clear();hinted.clear();seconds=0;started=false;finished=false;gaveUp=false;hintsUsed=0;filter='all';cells.forEach((_,id)=>refreshCell(id));close();update();window.scrollTo({top:0,behavior:'smooth'})}
+function reset(){if(!finished&&!confirm('처음부터 다시 시작할까요?'))return;stop();found.clear();hinted.clear();seconds=0;started=false;finished=false;gaveUp=false;hintsUsed=0;filter='all';cells.forEach((_,id)=>refreshCell(id));close();update();if(!desktopQuery.matches)window.scrollTo({top:0,behavior:'smooth'})}
 $('form').addEventListener('submit',e=>{e.preventDefault();send()});$('hintBtn').addEventListener('click',hint);$('giveupBtn').addEventListener('click',giveup);$('sound').addEventListener('click',()=>{soundOn=!soundOn;update()});document.querySelectorAll('[data-filter]').forEach(b=>b.addEventListener('click',()=>{filter=b.dataset.filter;update()}));$('shade').addEventListener('click',e=>{if(e.target===$('shade'))close()});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('shade').hidden)close()});document.addEventListener('visibilitychange',()=>{if(document.hidden){stop()}else if(started&&!finished)start()});
 build();
 </script></body></html>
